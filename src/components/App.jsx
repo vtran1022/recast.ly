@@ -1,19 +1,32 @@
-import exampleVideoData from '../data/exampleVideoData.js';
+import searchYouTube from '../lib/searchYouTube.js';
 import VideoList from './VideoList.js';
 import VideoPlayer from './VideoPlayer.js';
+import Search from './Search.js';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      videoList: exampleVideoData,
-      currentVideo: exampleVideoData[0]
+      videoList: [],
+      currentVideo: {
+        snippet: {title: '', description: ''},
+        id: {videoId: ''}
+      }
     };
   }
 
   setCurrentVideo(video) {
-    this.setState({currentVideo: video});
+    this.setState({
+      currentVideo: video,
+
+    });
+  }
+
+  componentDidMount() {
+    searchYouTube('', (vid) => {
+      currentVideo: vid;
+    });
   }
 
   render() {
@@ -21,7 +34,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <Search />
           </div>
         </nav>
         <div className="row">
@@ -37,10 +50,6 @@ class App extends React.Component {
     );
   }
 }
-
-// return (
-//   <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.todo}</li>
-// );
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
