@@ -29,13 +29,18 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.videoList} />
+            <VideoList videos={this.state.videoList}
+              setCurrentVideo={this.setCurrentVideo.bind(this)} />
           </div>
         </div>
       </div>
     );
   }
 }
+
+// return (
+//   <li style={style} onClick={this.onListItemClick.bind(this)}>{this.props.todo}</li>
+// );
 
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
