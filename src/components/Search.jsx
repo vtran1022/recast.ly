@@ -3,6 +3,7 @@ var Search = (props) => (
     <input
       className="form-control"
       type="text"
+      onKeyUp={_.debounce((event) => {}, 500)}
       onChange={(event) => props.handleSearchChange(event.target.value)}
     />
     <button className="btn hidden-sm-down">
