@@ -6,21 +6,27 @@ $.ajaxPrefilter(function (settings, _, jqXHR) {
 
 var searchYouTube = (query, callback) => {
   $.ajax({
-    url: 'https://app-hrsei-api.herokuapp.com/api/recastly/videos',
+    url: `https://app-hrsei-api.herokuapp.com/api/recastly/videos/?youtube_api_key=${YOUTUBE_API_KEY}`,
     type: 'GET',
     data: {
-      key: YOUTUBE_API_KEY,
-      maxResults: 5,
-      q: query,
-      type: 'video',
       part: 'snippet',
+      q: query,
+      maxResults: 5,
+      type: 'video',
       videoEmbeddable: true
     },
     contentType: 'application/json',
     success: (data) => {
       callback(data);
+    },
+    error: () => {
+      console.error('YouTube failed to get video');
     }
   });
 };
 
 export default searchYouTube;
+
+/*
+'https://www.googleapis.com/youtube/v3/search'
+*/
